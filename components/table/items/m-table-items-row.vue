@@ -29,7 +29,7 @@
 import dateFilter from '~/plugins/filters/date.filter'
 
 export default {
-    name: 'MTableRow',
+    name: 'MTableItemsRow',
     props: {
         rowData: {
             type: Object,

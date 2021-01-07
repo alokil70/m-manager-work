@@ -4,10 +4,11 @@
 @import "font-size/headers";
 
 @import 'nav-bars/navbar';
+@import 'nav-bars/navbar2';
 @import 'nav-bars/left-bar';
 
-@import "button/btn";
 @import "button/m-btn";
+@import "button/m-btn-group";
 
 @import "card/card";
 @import "card/auth-card";
@@ -20,6 +21,8 @@
 @import "form/input";
 @import "form/toggle";
 @import "form/form";
+
+@import "modal/modal";
 
 
 @import "size/height";

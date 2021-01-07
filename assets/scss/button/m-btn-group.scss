@@ -1,0 +1,40 @@
+.m-btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $color-white;
+    /*border-radius: 4px;*/
+    height: 100%;
+    width: 100%;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.3s;
+    &__closeBtn{
+        background-color: $color-alt;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $modal-upBar-height;
+        height: $modal-upBar-height;
+        color: $color-grey;
+        font-size: 20px;
+        cursor: pointer;
+        &:hover{
+            background-color: $color-alt-hover;
+            color: $color-white;
+        }
+    }
+}
+
+.m-btn-group:hover {
+    background: $color-alt-hover;
+}
+
+.material-icons {
+    margin-right: 8px;
+}
+
+.disabled {
+    pointer-events: none;
+    background-color: #aeaeae;
+}

@@ -1,12 +1,6 @@
 <template>
     <div class="default-page">
         <navbar />
-        <modal name="my-first-modal">
-            <h2>default</h2>
-        </modal>
-        <modal name="my-first-modal2">
-            <h2>default2</h2>
-        </modal>
         <Nuxt class="container" />
     </div>
 </template>

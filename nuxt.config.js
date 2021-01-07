@@ -5,7 +5,7 @@ export default {
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
      */
-    mode: 'spa',
+    ssr: false,
     /*
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
@@ -43,10 +43,7 @@ export default {
      ** Plugins to load before mounting the App
      ** https://nuxtjs.org/guide/plugins
      */
-    plugins: [
-        { src: '~/plugins/vuelidate', mode: 'client' },
-        { src: '~/plugins/vue-modal', mode: 'client' },
-    ],
+    plugins: [{ src: '~/plugins/vuelidate', mode: 'client' }],
     /*
      ** Auto import components
      ** See https://nuxtjs.org/api/configuration-components
@@ -111,7 +108,7 @@ export default {
         timeout: 5000,
     },
     server: {
-        port: 3030,
+        port: 4041,
         host: '0.0.0.0',
     },
     /*

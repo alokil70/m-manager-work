@@ -1,6 +1,6 @@
 <template>
     <div class="flex-center-align empty-page">
-        <h1 class="error-color">Ошибка</h1>
+        <h1 class="error-color error">Ошибка</h1>
         <nuxt-link to="/"><span class="white upper">вернуться</span></nuxt-link>
     </div>
 </template>

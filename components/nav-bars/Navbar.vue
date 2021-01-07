@@ -2,17 +2,10 @@
     <header>
         <nav>
             <ul>
-                <li>
-                    <nuxt-link v-if="$auth.user.admin" to="/client"
-                        >Клиенты</nuxt-link
-                    >
-                </li>
-                <li><nuxt-link to="/company">Компании</nuxt-link></li>
-                <li><nuxt-link to="/diler">Дилеры</nuxt-link></li>
-                <li>
-                    <nuxt-link v-if="$auth.user.admin" to="/manager">
-                        Менеджеры
-                    </nuxt-link>
+                <li v-for="item in menu" :key="item.id">
+                    <nuxt-link v-if="!item.isAdmin" :to="item.link">{{
+                        item.title
+                    }}</nuxt-link>
                 </li>
                 <li><nuxt-link to="/forms">Формы</nuxt-link></li>
                 <li>
@@ -46,6 +39,32 @@ export default {
     name: 'Navbar',
     data: () => ({
         date: null,
+        menu: [
+            {
+                id: 1,
+                title: 'Номенклатура',
+                isAdmin: false,
+                link: '/items',
+            },
+            {
+                id: 2,
+                title: 'Пользователи',
+                isAdmin: false,
+                link: '/users',
+            },
+            {
+                id: 3,
+                title: 'Отчеты',
+                isAdmin: false,
+                link: '/reports',
+            },
+            {
+                id: 20,
+                title: 'Настройки',
+                isAdmin: true,
+                link: '/settings',
+            },
+        ],
     }),
     mounted() {
         setInterval(() => {

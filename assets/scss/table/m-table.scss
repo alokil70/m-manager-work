@@ -1,5 +1,4 @@
 .m-table {
-    margin: 0 auto;
     &__header {
         background-color: $nav-bar-back;
         p {
@@ -27,5 +26,15 @@
     margin: $margin6 0;
     flex-basis: 20%;
     text-align: center;
+}
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        color: $color-white;
+        background-color: $color-alt-hover;
+        transition: ease-in .1s;
+    }
 }
 
