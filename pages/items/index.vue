@@ -224,14 +224,16 @@ export default {
             console.log(this.selectedCategory)
         },
         async deleteCategory(item) {
-            /* const index = this.category.indexOf(item)
-            confirm('Удвлить ?') && this.categoryFormList.splice(index, 1) */
+            /* confirm('Удвлить ?') && this.categoryFormList.splice(index, 1) */
             this.disabled = true
-            await this.$store.dispatch(
-                'products/DELETE_CATEGORY_FROM_API',
-                item.id,
-            )
-            await this.$store.dispatch('products/GET_CATEGORY_FROM_API')
+            if (!this.products.find((i) => i.CategoryId === item.id)) {
+                await this.$store.dispatch(
+                    'products/DELETE_CATEGORY_FROM_API',
+                    item.id,
+                )
+                await this.$store.dispatch('products/GET_CATEGORY_FROM_API')
+            }
+
             this.disabled = false
         },
         async saveGroup() {
