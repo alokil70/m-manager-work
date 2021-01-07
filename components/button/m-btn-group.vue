@@ -1,11 +1,15 @@
 <template>
-    <div class="m-btn-group" :class="className" @click="$emit('btnClick')">
+    <div
+        class="m-btn-group"
+        :class="[className, selected ? 'bgRed' : 'bgBlue']"
+        @click="btnClicked"
+    >
         <!--<i class="material-icons">e dit</i>-->
         <div>
             <span>{{ title }}</span>
         </div>
 
-        <h1 class="m-btn-group__closeBtn" @click="$emit('delBtn')">Х</h1>
+        <h1 class="m-btn-group__closeBtn" @click="btnDelete">Х</h1>
     </div>
 </template>
 
@@ -19,6 +23,21 @@ export default {
         },
         disabled: Boolean,
         error: Boolean,
+        selectedItem: {
+            type: Object,
+            default: () => {
+                return {}
+            },
+        },
+        item: {
+            type: Object,
+            default: () => {
+                return {}
+            },
+        },
+    },
+    data() {
+        return {}
     },
     computed: {
         className() {
@@ -27,8 +46,22 @@ export default {
                 error: this.error,
             }
         },
+        selected() {
+            return this.item === this.selectedItem
+        },
     },
-    methods: {},
+    methods: {
+        btnDelete() {
+            if (!this.disabled) {
+                this.$emit('delBtn')
+            }
+        },
+        btnClicked() {
+            if (!this.disabled) {
+                this.$emit('btnClick')
+            }
+        },
+    },
 }
 </script>
 

@@ -5,8 +5,11 @@
                 v-for="item in category"
                 :key="item.id"
                 :title="item.categoryName"
-                class="bg-blue m6"
+                class="m6"
                 :disabled="disabled"
+                :selected="selected"
+                :item="item"
+                :selected-item="selectedCategory"
                 @delBtn="deleteCategory(item)"
                 @btnClick="selectCategory(item)"
             />
@@ -14,16 +17,16 @@
         <div class="nav-block2 bg-title">
             <m-btn
                 title="Добавить позицию"
-                class="m6 bg-green"
+                class="m6 bgGreen"
                 @click="addItem"
             />
             <m-btn
                 title="Добавить группу"
-                class="m6 bg-green"
+                class="m6 bgGreen"
                 @click="addGroup"
             />
-            <m-btn title="Добавить" class="m6 bg-green" />
-            <m-btn title="Добавить" class="m6 bg-green" />
+            <m-btn title="Добавить" class="m6 bgGreen" />
+            <m-btn title="Добавить" class="m6 bgGreen" />
         </div>
         <m-modal v-if="modalAddItem" @close="modalAddItem = !modalAddItem">
             <div class="header flex-center-align m12">Название позиции</div>
@@ -145,7 +148,7 @@ export default {
             text: '',
             text1: '',
             text2: '',
-            categoryId: 1,
+            categoryId: null,
         },
         defaultItem: {
             productName: '',
@@ -155,7 +158,7 @@ export default {
             text: '',
             text1: '',
             text2: '',
-            categoryId: '',
+            categoryId: null,
         },
     }),
     async fetch({ store }) {
@@ -183,7 +186,6 @@ export default {
             })
         },
     },
-
     methods: {
         addItem() {
             this.modalAddItem = true
