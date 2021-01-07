@@ -6,7 +6,7 @@
     >
         <!--<i class="material-icons">e dit</i>-->
         <div>
-            <span>{{ item.categoryName }}{{ selected }}</span>
+            <span>{{ item.categoryName }}</span>
         </div>
 
         <h1 class="m-btn-group__closeBtn" @click="btnDelete">Х</h1>
@@ -47,8 +47,9 @@ export default {
             }
         },
         selected() {
-            // console.log(this.item.categoryName, this.selectedItem.categoryName)
-            return this.item === this.selectedItem
+            if (this.selectedItem) {
+                return this.item.id === this.selectedItem.id
+            } else return false
         },
     },
     methods: {

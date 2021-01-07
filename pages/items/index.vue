@@ -175,13 +175,13 @@ export default {
             managers: (state) => state.users.users,
         }),
         itemFilteredList() {
-            return this.products.filter((i) => {
-                if (this.selectedCategory) {
-                    return i.CategoryId === this.selectedCategory.id
-                } else {
-                    return this.products
-                }
-            })
+            if (this.selectedCategory) {
+                return this.products.filter(
+                    (i) => i.CategoryId === this.selectedCategory.id,
+                )
+            } else {
+                return false
+            }
         },
     },
     methods: {
