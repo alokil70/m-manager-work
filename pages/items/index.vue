@@ -180,7 +180,7 @@ export default {
                     (i) => i.CategoryId === this.selectedCategory.id,
                 )
             } else {
-                return false
+                return []
             }
         },
     },
