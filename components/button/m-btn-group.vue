@@ -6,7 +6,7 @@
     >
         <!--<i class="material-icons">e dit</i>-->
         <div>
-            <span>{{ title }}</span>
+            <span>{{ item.categoryName }}{{ selected }}</span>
         </div>
 
         <h1 class="m-btn-group__closeBtn" @click="btnDelete">Х</h1>
@@ -47,13 +47,14 @@ export default {
             }
         },
         selected() {
+            // console.log(this.item.categoryName, this.selectedItem.categoryName)
             return this.item === this.selectedItem
         },
     },
     methods: {
         btnDelete() {
             if (!this.disabled) {
-                this.$emit('delBtn')
+                this.$emit('btnDelete')
             }
         },
         btnClicked() {

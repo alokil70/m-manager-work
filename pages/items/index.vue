@@ -4,17 +4,15 @@
             <m-btn-group
                 v-for="item in category"
                 :key="item.id"
-                :title="item.categoryName"
                 class="m6"
                 :disabled="disabled"
-                :selected="selected"
                 :item="item"
                 :selected-item="selectedCategory"
-                @delBtn="deleteCategory(item)"
+                @btnDelete="deleteCategory(item)"
                 @btnClick="selectCategory(item)"
             />
         </div>
-        <div class="nav-block2 bg-title">
+        <div class="nav-block2 bgTitle">
             <m-btn
                 title="Добавить позицию"
                 class="m6 bgGreen"
@@ -49,16 +47,16 @@
                 </div>
                 <div class="flex w400">
                     <m-btn
-                        class="bg-red"
+                        class="bgRed"
                         title="Сохранить"
                         :disabled="disabled"
                         @click="saveItem"
                     ></m-btn>
                     <m-btn
-                        class="bg-red"
+                        class="bgRed"
                         title="Отмена"
                         :disabled="disabled"
-                        @click="modalShow = !modalShow"
+                        @click="modalAddItem = !modalAddItem"
                     ></m-btn>
                 </div>
             </div>
@@ -79,16 +77,16 @@
                 </div>
                 <div class="flex w400">
                     <m-btn
-                        class="bg-red"
+                        class="bgRed"
                         title="Сохранить"
                         :disabled="disabled"
                         @click="saveGroup"
                     ></m-btn>
                     <m-btn
-                        class="bg-red"
+                        class="bgRed"
                         title="Отмена"
                         :disabled="disabled"
-                        @click="modalShow = !modalShow"
+                        @click="modalAddGroup = !modalAddGroup"
                     ></m-btn>
                 </div>
             </div>
@@ -116,6 +114,15 @@ export default {
     name: 'Index',
     auth: true,
     components: { MInput, MModal, MBtnGroup, MBtn, MTableItems },
+    async asyncData({ store }) {
+        if (
+            store.getters['products/PRODUCTS'].length === 0 &&
+            store.getters['products/CATEGORY'].length === 0
+        ) {
+            await store.dispatch('products/GET_PRODUCTS_FROM_API')
+            await store.dispatch('products/GET_CATEGORY_FROM_API')
+        }
+    },
     data: () => ({
         title: 'Номенклатура',
         modalAddItem: false,
@@ -161,15 +168,6 @@ export default {
             categoryId: null,
         },
     }),
-    async fetch({ store }) {
-        if (
-            store.getters['products/PRODUCTS'].length === 0 &&
-            store.getters['products/CATEGORY'].length === 0
-        ) {
-            await store.dispatch('products/GET_PRODUCTS_FROM_API')
-            await store.dispatch('products/GET_CATEGORY_FROM_API')
-        }
-    },
     computed: {
         ...mapState({
             products: (state) => state.products.products,
@@ -222,6 +220,8 @@ export default {
             this.editedItem = this.defaultItem
             this.editedGroup = this.defaultGroup
             this.disabled = false
+
+            console.log(this.selectedCategory)
         },
         async deleteCategory(item) {
             /* const index = this.category.indexOf(item)
@@ -235,6 +235,7 @@ export default {
             this.disabled = false
         },
         async saveGroup() {
+            this.disabled = true
             await this.$store.dispatch(
                 'products/POST_CATEGORY_TO_API',
                 this.editedGroup,
@@ -242,15 +243,14 @@ export default {
             await this.close()
         },
         async saveItem() {
+            console.log(this.selectedCategory)
+            this.disabled = true
             if (this.selectedCategory) {
                 const obj = this.category.find(
                     (i) => i.id === this.selectedCategory.id,
                 )
                 this.editedItem.categoryId = obj.id
-            } else
-                this.editedItem.categoryId = this.category.find(
-                    (i) => i.categoryName !== '',
-                ).id
+            }
 
             const formData = new FormData()
             for (const item in this.editedItem) {
@@ -261,6 +261,7 @@ export default {
             await this.$store.dispatch('products/POST_PRODUCT_TO_API', formData)
             this.files = null
             await this.close()
+            console.log(this.selectedCategory)
         },
     },
 }

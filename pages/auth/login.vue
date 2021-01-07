@@ -36,7 +36,7 @@
             </form>
             <div class="flex">
                 <m-btn
-                    class="bg-red"
+                    class="bgRed"
                     :disabled="loading"
                     title="Войти"
                     @click="userLogin"
