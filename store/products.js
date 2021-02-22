@@ -52,6 +52,7 @@ export const actions = {
                 data: postData,
             })
         }
+        await this.dispatch('products/GET_CATEGORY_FROM_API')
     },
     async POST_PRODUCT_TO_API({ commit }, postData) {
         const token = this.$auth.getToken('local')
@@ -65,6 +66,7 @@ export const actions = {
                 data: postData,
             })
         }
+        await this.dispatch('products/GET_PRODUCTS_FROM_API')
     },
     async DELETE_PRODUCT_FROM_API({ commit }, id) {
         const token = this.$auth.getToken('local')
@@ -77,9 +79,11 @@ export const actions = {
                 },
             })
         }
+        await this.dispatch('products/GET_PRODUCTS_FROM_API')
     },
     async UPDATE_PRODUCT_ON_API({ commit }, postData) {
         await this.$axios.patch('/products/' + postData.id, postData)
+        await this.dispatch('products/GET_PRODUCTS_FROM_API')
     },
     async DELETE_CATEGORY_FROM_API({ commit }, id) {
         const token = this.$auth.getToken('local')
@@ -92,6 +96,7 @@ export const actions = {
                 },
             })
         }
+        await this.dispatch('products/GET_CATEGORY_FROM_API')
     },
 }
 

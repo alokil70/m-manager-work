@@ -95,7 +95,7 @@
             <m-table-items
                 :column-name="columnName"
                 :row-data="itemFilteredList"
-                @btnDelete="productDelete($event)"
+                @btnDelete="deleteProduct($event)"
             />
         </div>
     </div>
@@ -234,11 +234,10 @@ export default {
             }
             this.disabled = false
         },
-        async productDelete(id) {
+        async deleteProduct(id) {
             /* confirm('Удвлить ?') && this.categoryFormList.splice(index, 1) */
             this.disabled = true
             await this.$store.dispatch('products/DELETE_PRODUCT_FROM_API', id)
-            await this.$store.dispatch('products/GET_PRODUCTS_FROM_API')
             this.disabled = false
         },
         async saveGroup() {

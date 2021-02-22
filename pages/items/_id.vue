@@ -34,8 +34,13 @@
             </div>
             <m-btn
                 class="w400 bgGreen"
-                :title="titles.button"
-                @click="updateroduct"
+                :title="titles.btnSave"
+                @click="updateProduct"
+            />
+            <m-btn
+                class="w400 bgGreen"
+                :title="titles.btnDelete"
+                @click="deleteProduct"
             />
         </div>
     </div>
@@ -54,7 +59,8 @@ export default {
     },
     data: () => ({
         titles: {
-            button: 'Сохранить',
+            btnSave: 'Сохранить',
+            btnDelete: 'Удалить',
             title: 'Название',
             price: 'Цена',
             description: 'Описание',
@@ -83,8 +89,16 @@ export default {
         },
     },
     methods: {
-        updateroduct() {
+        deleteProduct() {
+            this.$store.dispatch(
+                'products/DELETE_PRODUCT_FROM_API',
+                this.product.id,
+            )
+            this.$router.push('/items')
+        },
+        updateProduct() {
             this.$store.dispatch('products/UPDATE_PRODUCT_ON_API', this.product)
+            this.$router.push('/items')
         },
     },
 }
