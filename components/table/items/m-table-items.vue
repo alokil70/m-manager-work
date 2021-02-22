@@ -9,6 +9,8 @@
             v-for="row in rowData"
             :key="row.id"
             :row-data="row"
+            router-id-data="items-id"
+            @btnDelete="btnDelete(row.id)"
         />
     </div>
 </template>
@@ -42,6 +44,18 @@ export default {
             default: () => {
                 return []
             },
+        },
+    },
+    methods: {
+        btnDelete(id) {
+            if (!this.disabled) {
+                this.$emit('btnDelete', id)
+            }
+        },
+        btnClicked() {
+            if (!this.disabled) {
+                this.$emit('btnClick')
+            }
         },
     },
 }

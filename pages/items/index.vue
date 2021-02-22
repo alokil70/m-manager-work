@@ -93,10 +93,9 @@
         </m-modal>
         <div class="form-block">
             <m-table-items
-                :title="title"
                 :column-name="columnName"
                 :row-data="itemFilteredList"
-                :category="category"
+                @btnDelete="productDelete($event)"
             />
         </div>
     </div>
@@ -233,7 +232,13 @@ export default {
                 )
                 await this.$store.dispatch('products/GET_CATEGORY_FROM_API')
             }
-
+            this.disabled = false
+        },
+        async productDelete(id) {
+            /* confirm('Удвлить ?') && this.categoryFormList.splice(index, 1) */
+            this.disabled = true
+            await this.$store.dispatch('products/DELETE_PRODUCT_FROM_API', id)
+            await this.$store.dispatch('products/GET_PRODUCTS_FROM_API')
             this.disabled = false
         },
         async saveGroup() {

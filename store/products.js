@@ -54,10 +54,32 @@ export const actions = {
         }
     },
     async POST_PRODUCT_TO_API({ commit }, postData) {
-        await this.$axios.post('/products', postData)
+        const token = this.$auth.getToken('local')
+        if (token) {
+            await this.$axios({
+                method: 'post',
+                url: '/products',
+                headers: {
+                    Authorization: 'Bearer ' + token.split(' ')[2],
+                },
+                data: postData,
+            })
+        }
     },
-    async DELETE_PRODUCT_FROM_API({ commit }, productId) {
-        await this.$axios.post('/products/delete/' + productId)
+    async DELETE_PRODUCT_FROM_API({ commit }, id) {
+        const token = this.$auth.getToken('local')
+        if (token) {
+            await this.$axios({
+                method: 'post',
+                url: '/products/delete/' + id,
+                headers: {
+                    Authorization: 'Bearer ' + token.split(' ')[2],
+                },
+            })
+        }
+    },
+    async UPDATE_PRODUCT_ON_API({ commit }, postData) {
+        await this.$axios.patch('/products/' + postData.id, postData)
     },
     async DELETE_CATEGORY_FROM_API({ commit }, id) {
         const token = this.$auth.getToken('local')
@@ -75,5 +97,8 @@ export const actions = {
 
 export const getters = {
     PRODUCTS: (s) => s.products,
+    GET_PRODUCT_BY_ID: (s) => (id) => {
+        return s.products.find((u) => u.id === id)
+    },
     CATEGORY: (s) => s.category,
 }
