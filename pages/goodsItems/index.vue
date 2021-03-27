@@ -122,17 +122,17 @@ export default {
         modalAddItem: false,
         modalAddGroup: false,
         storeItem: {
-            get: 'products/PRODUCTS',
-            actionGet: 'products/GET_PRODUCTS_FROM_API',
-            actionSet: 'products/SET_PRODUCT_TO_API',
-            actionUpd: 'products/UPDATE_PRODUCT_ON_API',
-            actionDel: 'products/DELETE_PRODUCT_FROM_API',
+            get: 'goodsItems/PRODUCTS',
+            actionGet: 'goodsItems/GET_GOODS_FROM_API',
+            actionSet: 'goodsItems/SET_GOODS_TO_API',
+            actionUpd: 'goodsItems/UPDATE_GOODS_ON_API',
+            actionDel: 'goodsItems/DELETE_GOODS_FROM_API',
         },
         storeCategory: {
-            get: 'products/CATEGORY',
-            actionGet: 'products/GET_CATEGORY_FROM_API',
-            actionSet: 'products/SET_CATEGORY_TO_API',
-            actionDel: 'products/DELETE_CATEGORY_FROM_API',
+            get: 'goodsItems/CATEGORY',
+            actionGet: 'goodsItems/GET_GOODSCATEGORY_FROM_API',
+            actionSet: 'goodsItems/SET_GOODSCATEGORY_TO_API',
+            actionDel: 'goodsItems/DELETE_GOODSCATEGORY_FROM_API',
         },
         columnName: [
             { id: 1, title: 'чтото' },
@@ -159,26 +159,26 @@ export default {
             description: '',
             price: null,
             image: '',
-            categoryId: null,
+            goodsCategoryId: null,
         },
         defaultItem: {
             title: '',
             description: '',
             price: null,
             image: '',
-            categoryId: null,
+            goodsCategoryId: null,
         },
     }),
     computed: {
         ...mapState({
-            products: (state) => state.products.products,
-            category: (state) => state.products.category,
+            products: (state) => state.goodsItems.goodsItems,
+            category: (state) => state.goodsItems.goodsCategory,
             managers: (state) => state.users.users,
         }),
         itemFilteredList() {
             if (this.selectedCategory) {
                 return this.products.filter(
-                    (i) => i.CategoryId === this.selectedCategory.id,
+                    (i) => i.GoodsCategoryId === this.selectedCategory.id,
                 )
             } else {
                 return []
@@ -242,7 +242,7 @@ export default {
                 const obj = this.category.find(
                     (i) => i.id === this.selectedCategory.id,
                 )
-                this.editedItem.categoryId = obj.id
+                this.editedItem.goodsCategoryId = obj.id
             }
 
             const formData = new FormData()

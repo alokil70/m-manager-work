@@ -6,7 +6,7 @@
                 class="row"
             >
                 <div>
-                    <div class="fz12 w200">{{ rowData.productName }}</div>
+                    <div class="fz12 w200">{{ rowData.title }}</div>
                 </div>
                 <div>
                     <div class="fz12 w100">{{ rowData.price }}р</div>
@@ -21,7 +21,6 @@
                     Действительна до {{ dateFilter(rowData.expire) }}
                 </div>-->
                 <div class="fz12 w100">{{ rowData.description }}</div>
-                <div class="fz12 w100">{{ rowData.CategoryId }}</div>
             </nuxt-link>
             <span class="m-btn-group__closeBtn" @click="btnDelete">Х</span>
         </div>

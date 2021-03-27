@@ -2,6 +2,7 @@
     <header>
         <nav>
             <ul>
+                <li><nuxt-link to="/">/</nuxt-link></li>
                 <li v-for="item in menu" :key="item.id">
                     <nuxt-link v-if="!item.isAdmin" :to="item.link">{{
                         item.title
@@ -42,24 +43,30 @@ export default {
         menu: [
             {
                 id: 1,
-                title: 'Номенклатура',
+                title: 'Производимые товары',
                 isAdmin: false,
                 link: '/items',
             },
             {
                 id: 2,
+                title: 'Закупаемые товары',
+                isAdmin: false,
+                link: '/goodsItems',
+            },
+            {
+                id: 3,
                 title: 'Пользователи',
                 isAdmin: false,
                 link: '/users',
             },
             {
-                id: 3,
+                id: 4,
                 title: 'Отчеты',
                 isAdmin: false,
                 link: '/reports',
             },
             {
-                id: 20,
+                id: 5,
                 title: 'Настройки',
                 isAdmin: true,
                 link: '/settings',

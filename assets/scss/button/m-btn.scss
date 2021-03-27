@@ -4,13 +4,30 @@
     justify-content: center;
     padding: $padding/2 $padding;
     color: $color-white;
-    /*border-radius: 4px;*/
+    min-width: 50px;
+    height: 100%;
+    width: 100%;
+    user-select: none;
+    cursor: pointer;
+    background-color: $color-green;
+    transition: 0.2s;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+/*.m-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $padding/2 $padding;
+    color: $color-white;
+    !*border-radius: 4px;*!
     height: 100%;
     width: 100%;
     user-select: none;
     cursor: pointer;
     transition: 0.3s;
-}
+}*/
 
 .m-btn:hover {
     background: $color-alt-hover;

@@ -3,12 +3,13 @@
     align-items: center;
     justify-content: space-between;
     color: $color-white;
-    /*border-radius: 4px;*/
     height: 100%;
     width: 100%;
     user-select: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
+    font-weight: 500;
+    border-radius: 4px;
     &__closeBtn{
         background-color: $color-alt;
         display: flex;

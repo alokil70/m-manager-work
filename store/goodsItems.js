@@ -1,51 +1,52 @@
 export const state = () => ({
-    products: [],
-    category: [],
+    goodsItems: [],
+    goodsCategory: [],
 })
 
 export const mutations = {
-    SET_PRODUCTS_TO_STATE(state, payload) {
-        state.products = payload
+    SET_GOODS_TO_STATE(state, payload) {
+        state.goodsItems = payload
     },
-    SET_CATEGORY_TO_STATE(state, payload) {
-        state.category = payload
+    SET_GOODSCATEGORY_TO_STATE(state, payload) {
+        state.goodsCategory = payload
     },
 }
+
 export const actions = {
-    async GET_PRODUCTS_FROM_API({ commit }) {
+    async GET_GOODS_FROM_API({ commit }) {
         const token = this.$auth.getToken('local')
         if (token) {
             await this.$axios({
                 method: 'get',
-                url: '/products',
+                url: '/goodsItem',
                 headers: {
                     Authorization: 'Bearer ' + token.split(' ')[2],
                 },
             }).then((response) => {
-                commit('SET_PRODUCTS_TO_STATE', response.data)
+                commit('SET_GOODS_TO_STATE', response.data)
             })
         }
     },
-    async GET_CATEGORY_FROM_API({ commit }) {
+    async GET_GOODSCATEGORY_FROM_API({ commit }) {
         const token = this.$auth.getToken('local')
         if (token) {
             await this.$axios({
                 method: 'get',
-                url: '/category',
+                url: '/goodsCategory',
                 headers: {
                     Authorization: 'Bearer ' + token.split(' ')[2],
                 },
             }).then((response) => {
-                commit('SET_CATEGORY_TO_STATE', response.data)
+                commit('SET_GOODSCATEGORY_TO_STATE', response.data)
             })
         }
     },
-    async SET_CATEGORY_TO_API({ commit }, postData) {
+    async SET_GOODSCATEGORY_TO_API({ commit }, postData) {
         const token = this.$auth.getToken('local')
         if (token) {
             await this.$axios({
                 method: 'post',
-                url: '/category',
+                url: '/goodsCategory',
                 headers: {
                     Authorization: 'Bearer ' + token.split(' ')[2],
                 },
@@ -54,12 +55,12 @@ export const actions = {
         }
         await this.dispatch('products/GET_CATEGORY_FROM_API')
     },
-    async SET_PRODUCT_TO_API({ commit }, postData) {
+    async SET_GOODS_TO_API({ commit }, postData) {
         const token = this.$auth.getToken('local')
         if (token) {
             await this.$axios({
                 method: 'post',
-                url: '/products',
+                url: '/goodsItem',
                 headers: {
                     Authorization: 'Bearer ' + token.split(' ')[2],
                 },
@@ -68,12 +69,12 @@ export const actions = {
         }
         await this.dispatch('products/GET_PRODUCTS_FROM_API')
     },
-    async DELETE_PRODUCT_FROM_API({ commit }, id) {
+    async DELETE_GOODS_FROM_API({ commit }, id) {
         const token = this.$auth.getToken('local')
         if (token) {
             await this.$axios({
                 method: 'post',
-                url: '/products/delete/' + id,
+                url: '/goodsItem/delete/' + id,
                 headers: {
                     Authorization: 'Bearer ' + token.split(' ')[2],
                 },
@@ -81,29 +82,29 @@ export const actions = {
         }
         await this.dispatch('products/GET_PRODUCTS_FROM_API')
     },
-    async UPDATE_PRODUCT_ON_API({ commit }, postData) {
-        await this.$axios.patch('/products/' + postData.id, postData)
-        await this.dispatch('products/GET_PRODUCTS_FROM_API')
+    async UPDATE_GOODS_ON_API({ commit }, postData) {
+        await this.$axios.patch('/goodsItem/' + postData.id, postData)
+        await this.dispatch('goodsItems/GET_GOODS_FROM_API')
     },
-    async DELETE_CATEGORY_FROM_API({ commit }, id) {
+    async DELETE_GOODSCATEGORY_FROM_API({ commit }, id) {
         const token = this.$auth.getToken('local')
         if (token) {
             await this.$axios({
                 method: 'post',
-                url: '/category/delete/' + id,
+                url: '/goodsCategory/delete/' + id,
                 headers: {
                     Authorization: 'Bearer ' + token.split(' ')[2],
                 },
             })
         }
-        await this.dispatch('products/GET_CATEGORY_FROM_API')
+        await this.dispatch('goodsItems/GET_GOODSCATEGORY_FROM_API')
     },
 }
 
 export const getters = {
-    PRODUCTS: (s) => s.products,
-    GET_PRODUCT_BY_ID: (s) => (id) => {
-        return s.products.find((u) => u.id === id)
+    GOODS: (s) => s.goodsItems,
+    GET_GOODS_BY_ID: (s) => (id) => {
+        return s.goodsItems.find((u) => u.id === id)
     },
-    CATEGORY: (s) => s.category,
+    GOODSCATEGORY: (s) => s.goodsCategory,
 }

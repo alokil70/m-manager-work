@@ -20,6 +20,12 @@ import TabArchive from '@/components/tabArchive'
 import TabPosts from '@/components/tabPosts'
 export default {
     components: { TabPosts, TabArchive },
+    async asyncData({ store }) {
+        await store.dispatch('goodsItems/GET_GOODS_FROM_API')
+        await store.dispatch('goodsItems/GET_GOODSCATEGORY_FROM_API')
+        await store.dispatch('products/GET_PRODUCTS_FROM_API')
+        await store.dispatch('products/GET_CATEGORY_FROM_API')
+    },
     data() {
         return {
             currentTab: 'Posts',

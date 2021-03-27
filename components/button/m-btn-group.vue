@@ -6,7 +6,7 @@
     >
         <!--<i class="material-icons">e dit</i>-->
         <div>
-            <span>{{ item.categoryName }}</span>
+            <span class="m12">{{ item.title }}</span>
         </div>
 
         <h1 class="m-btn-group__closeBtn" @click="btnDelete">Х</h1>
