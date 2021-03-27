@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="work">
         <div class="nav-block bg-title">
             <m-btn-group
                 v-for="item in category"
@@ -86,13 +86,76 @@
                 </div>
             </div>
         </m-modal>
-        <div class="form-block">
+        <m-modal v-if="modalGoods" @close="modalGoods = !modalGoods">
+            <div class="flex-center-align m12">Калькуляция</div>
+            <div>
+                <div class="m12">
+                    <m-select
+                        :options="goods"
+                        :select-title="selected"
+                        @select="itemSelected"
+                    />
+                </div>
+                <div class="m12">
+                    <m-select
+                        :options="goods"
+                        :select-title="selected"
+                        @select="itemSelected"
+                    />
+                </div>
+                <div class="m12">
+                    <m-select
+                        :options="goods"
+                        :select-title="selected"
+                        @select="itemSelected"
+                    />
+                </div>
+                <div class="m12">
+                    <m-select
+                        :options="goods"
+                        :select-title="selected"
+                        @select="itemSelected"
+                    />
+                </div>
+                <!--<div class="m12">
+                    <m-input v-model="editedGroup.title" label="Название" />
+                    <m-input
+                        v-model="editedGroup.description"
+                        label="Описание"
+                    />
+                    <m-input v-model="editedGroup.image" label="Фото" />
+                </div>-->
+                <div class="flex w400">
+                    <m-btn
+                        class="bgRed m6"
+                        title="Сохранить"
+                        :disabled="disabled"
+                        @click="addCategory"
+                    ></m-btn>
+                    <m-btn
+                        class="bgRed m6"
+                        title="Отмена"
+                        :disabled="disabled"
+                        @click="modalGoods = !modalGoods"
+                    ></m-btn>
+                </div>
+            </div>
+        </m-modal>
+        <div class="product-btn-container">
+            <m-btn-product
+                v-for="item in itemFilteredList"
+                :key="item.id"
+                :title="item.title"
+                @click="modalGoods = !modalGoods"
+            />
+        </div>
+        <!--<div class="form-block">
             <m-table-items
                 :column-name="columnName"
                 :row-data="itemFilteredList"
                 @btnDelete="deleteItem($event)"
             />
-        </div>
+        </div>-->
     </div>
 </template>
 
@@ -101,13 +164,23 @@ import { mapState } from 'vuex'
 import MBtnGroup from '@/components/button/m-btn-group'
 import MModal from '@/components/modal/m-modal'
 import MInput from '@/components/form/m-input'
+import MBtnProduct from '@/components/button/m-btn-product'
+import MSelect from '@/components/select/m-select'
 import MTableItems from '~/components/table/items/m-table-items'
 import MBtn from '~/components/button/m-btn'
 
 export default {
     name: 'Index',
     auth: true,
-    components: { MInput, MModal, MBtnGroup, MBtn, MTableItems },
+    components: {
+        MSelect,
+        MBtnProduct,
+        MInput,
+        MModal,
+        MBtnGroup,
+        MBtn,
+        MTableItems,
+    },
     /* async asyncData({ store }) {
         if (
             store.getters[this.storeItem.get].length === 0 &&
@@ -119,8 +192,10 @@ export default {
     }, */
     data: () => ({
         title: 'Номенклатура',
+        modalGoods: false,
         modalAddItem: false,
         modalAddGroup: false,
+        selected: 'Выбор',
         storeItem: {
             get: 'products/PRODUCTS',
             actionGet: 'products/GET_PRODUCTS_FROM_API',
@@ -171,6 +246,7 @@ export default {
     }),
     computed: {
         ...mapState({
+            goods: (state) => state.goodsItems.goodsItems,
             products: (state) => state.products.products,
             category: (state) => state.products.category,
             managers: (state) => state.users.users,
@@ -201,6 +277,9 @@ export default {
                 (i) => i.id === this.selectedCategory.id,
             )
             this.editedItem.categoryId = obj.id
+        },
+        itemSelected(item) {
+            this.selected = item.title
         },
         async close() {
             this.disabled = true

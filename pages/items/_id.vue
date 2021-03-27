@@ -1,12 +1,12 @@
 <template>
     <div>
         <h1 class="flex-center-align fz28 fw300">
-            Номенклатурная позиция {{ product.productName }}
+            Номенклатурная позиция {{ product.title }}
         </h1>
         <h3 class="flex-center-align fw300">создан "{{ created }}"</h3>
         <div class="flex-center-align flex-wrap w1100">
             <div class="input-label card-min m12 flex-center-align">
-                <m-input v-model="product.productName" :label="titles.title" />
+                <m-input v-model="product.title" :label="titles.title" />
             </div>
             <div class="input-label card-min m12 flex-center-align">
                 <m-input v-model="product.price" :label="titles.price" />
@@ -18,19 +18,13 @@
                 />
             </div>
             <div class="input-label card-min m12 flex-center-align">
-                <m-input
-                    v-model="product.productName"
-                    :label="titles.modules"
-                />
+                <m-input v-model="product.title" :label="titles.modules" />
             </div>
             <div class="input-label card-min m12 flex-center-align">
-                <m-input
-                    v-model="product.productName"
-                    :label="titles.expired"
-                />
+                <m-input v-model="product.title" :label="titles.expired" />
             </div>
             <div class="input-label card-min m12 flex-center-align">
-                <m-input v-model="product.productName" :label="titles.access" />
+                <m-input v-model="product.title" :label="titles.access" />
             </div>
             <m-btn
                 class="w400 bgGreen"
@@ -73,6 +67,7 @@ export default {
     computed: {
         ...mapGetters({
             products: 'products/GET_PRODUCT_BY_ID',
+            goods: 'goodsItems/GOODS',
         }),
         isAdmin() {
             if (this.manager.admin) {

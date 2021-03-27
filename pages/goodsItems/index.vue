@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="work">
         <div class="nav-block bg-title">
             <m-btn-group
                 v-for="item in category"
