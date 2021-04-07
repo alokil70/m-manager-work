@@ -6,7 +6,12 @@
     >
         <!--<i class="material-icons">e dit</i>-->
         <div>
-            <span class="m12">{{ item.title }}</span>
+            <span class="m12"
+                >{{ item.title
+                }}<span v-if="item.description" class="fz12">
+                    ({{ item.description }})</span
+                ></span
+            >
         </div>
 
         <h1 class="m-btn-group__closeBtn" @click="btnDelete">Х</h1>

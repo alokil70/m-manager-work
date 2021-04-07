@@ -8,7 +8,7 @@
                         item.title
                     }}</nuxt-link>
                 </li>
-                <li><nuxt-link to="/forms">Формы</nuxt-link></li>
+                <!--<li><nuxt-link to="/forms">Формы</nuxt-link></li>-->
                 <li>
                     <nuxt-link v-if="$auth.user.admin" to="/setting">
                         Настройки
@@ -49,16 +49,22 @@ export default {
             },
             {
                 id: 2,
+                title: 'Полуфабрикаты',
+                isAdmin: false,
+                link: '/semis',
+            },
+            {
+                id: 3,
                 title: 'Закупаемые товары',
                 isAdmin: false,
                 link: '/goodsItems',
             },
-            {
+            /* {
                 id: 3,
                 title: 'Пользователи',
                 isAdmin: false,
                 link: '/users',
-            },
+            }, */
             {
                 id: 4,
                 title: 'Отчеты',

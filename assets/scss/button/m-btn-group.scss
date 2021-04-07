@@ -18,10 +18,14 @@
         width: $modal-upBar-height;
         height: $modal-upBar-height;
         color: $color-grey;
-        font-size: 20px;
+        font-weight: 600;
+        font-size: 28px;
+        transition: .7s;
         cursor: pointer;
         &:hover{
             background-color: $color-alt-hover;
+            font-size: 36px;
+            transition: .7s;
             color: $color-white;
         }
     }

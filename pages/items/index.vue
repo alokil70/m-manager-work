@@ -24,8 +24,7 @@
                 class="m6 bgGreen"
                 @click="modalCategory"
             />
-            <m-btn title="Добавить" class="m6 bgGreen" />
-            <m-btn title="Добавить" class="m6 bgGreen" />
+            <m-btn title="Редактировать категории" class="m6 bgGreen" />
         </div>
         <m-modal v-if="modalAddItem" @close="modalAddItem = !modalAddItem">
             <div class="flex-center-align m12">Название позиции</div>
@@ -87,50 +86,36 @@
             </div>
         </m-modal>
         <m-modal v-if="modalGoods" @close="modalGoods = !modalGoods">
+            <div class="flex-between m12">
+                <div class="m12">Позиция: {{ prod.title }}</div>
+                <div class="m12">Себестоимость: {{ prod.price }}</div>
+            </div>
+            <div class="m12">
+                <m-input v-model="prod.title" label="Название" />
+                <m-input v-model="prod.price" label="Цена" />
+                <m-input v-model="prod.description" label="Описание" />
+            </div>
+            <div class="flex-center-align m12">------------------------</div>
             <div class="flex-center-align m12">Калькуляция</div>
             <div>
                 <div class="m12">
-                    <m-select
-                        :options="goods"
-                        :select-title="selected"
-                        @select="itemSelected"
-                    />
+                    <m-select :options="goods" @select="itemSelected" />
                 </div>
                 <div class="m12">
-                    <m-select
-                        :options="goods"
-                        :select-title="selected"
-                        @select="itemSelected"
-                    />
+                    <m-select :options="goods" @select="itemSelected" />
                 </div>
                 <div class="m12">
-                    <m-select
-                        :options="goods"
-                        :select-title="selected"
-                        @select="itemSelected"
-                    />
+                    <m-select :options="goods" @select="itemSelected" />
                 </div>
                 <div class="m12">
-                    <m-select
-                        :options="goods"
-                        :select-title="selected"
-                        @select="itemSelected"
-                    />
+                    <m-select :options="goods" @select="itemSelected" />
                 </div>
-                <!--<div class="m12">
-                    <m-input v-model="editedGroup.title" label="Название" />
-                    <m-input
-                        v-model="editedGroup.description"
-                        label="Описание"
-                    />
-                    <m-input v-model="editedGroup.image" label="Фото" />
-                </div>-->
-                <div class="flex w400">
+                <div class="flex w460">
                     <m-btn
                         class="bgRed m6"
                         title="Сохранить"
                         :disabled="disabled"
-                        @click="addCategory"
+                        @click="updateItem"
                     ></m-btn>
                     <m-btn
                         class="bgRed m6"
@@ -146,16 +131,9 @@
                 v-for="item in itemFilteredList"
                 :key="item.id"
                 :title="item.title"
-                @click="modalGoods = !modalGoods"
+                @click="itemInfoWindow(item)"
             />
         </div>
-        <!--<div class="form-block">
-            <m-table-items
-                :column-name="columnName"
-                :row-data="itemFilteredList"
-                @btnDelete="deleteItem($event)"
-            />
-        </div>-->
     </div>
 </template>
 
@@ -191,11 +169,11 @@ export default {
         }
     }, */
     data: () => ({
+        prod: {},
         title: 'Номенклатура',
         modalGoods: false,
         modalAddItem: false,
         modalAddGroup: false,
-        selected: 'Выбор',
         storeItem: {
             get: 'products/PRODUCTS',
             actionGet: 'products/GET_PRODUCTS_FROM_API',
@@ -278,8 +256,10 @@ export default {
             )
             this.editedItem.categoryId = obj.id
         },
-        itemSelected(item) {
-            this.selected = item.title
+        itemSelected(item) {},
+        itemInfoWindow(item) {
+            this.modalGoods = true
+            this.prod = item
         },
         async close() {
             this.disabled = true
@@ -333,6 +313,10 @@ export default {
             await this.$store.dispatch(this.storeItem.actionSet, formData)
             this.files = null
             await this.close()
+        },
+        updateItem() {
+            this.$store.dispatch('products/UPDATE_PRODUCT_ON_API', this.prod)
+            this.modalGoods = false
         },
     },
 }

@@ -19,10 +19,6 @@
 export default {
     name: 'MSelect',
     props: {
-        selectTitle: {
-            type: String,
-            default: 'str',
-        },
         options: {
             type: Array,
             default() {
@@ -33,41 +29,15 @@ export default {
     data() {
         return {
             selectVisible: false,
+            selectTitle: 'Выбор товара',
         }
     },
     methods: {
         itemSelected(item) {
             this.$emit('select', item)
+            this.selectTitle = item.title
             this.selectVisible = false
         },
     },
 }
 </script>
-
-<style scoped>
-.m-select {
-    position: relative;
-    width: 200px;
-    cursor: pointer;
-    background: white;
-}
-.m-select p {
-    margin: 0;
-    padding: 6px;
-}
-.title {
-    border: solid 1px green;
-}
-.m-select-options {
-    border: solid 1px green;
-    position: absolute;
-    top: 36px;
-    right: 0;
-    width: 100%;
-    background: white;
-    z-index: 99;
-}
-.m-select-options p:hover {
-    background: #909ea3;
-}
-</style>

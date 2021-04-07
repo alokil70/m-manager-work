@@ -1,7 +1,7 @@
 .modalWrapper {
     background: rgba(0, 0, 0, .4);
     position: absolute;
-    top: 0;
+    top: -100px;
     right: 0;
     left: 0;
     bottom: 0;
@@ -19,21 +19,25 @@
         top: 0;
     }
     &__closeBtn{
-        background-color: $color-alt;
         display: flex;
         align-items: center;
         justify-content: center;
         width: $modal-upBar-height;
         height: $modal-upBar-height;
-        color: $color-grey;
-        font-size: 30px;
+        color: $color-alt-hover;
+        text-align: center;
+        font-weight: 600;
+        font-size: 64px;
         position: absolute;
-        top: 0;
-        right: 0;
+        top: -50px;
+        right: -50px;
         cursor: pointer;
+        transition: .7s;
         &:hover{
-            background-color: $color-alt-hover;
             color: $color-white;
+            background-color: $color-alt-hover;
+            font-size: 46px;
+            transition: .7s;
         }
     }
 }
@@ -47,15 +51,15 @@
 
 @keyframes popUp {
     0% {
-        transform: translateX(46rem);
+        transform: translateY(-46rem);
         opacity: 0;
     }
-    20% {
-        transform: translateX(32rem);
+    40% {
+        transform: translateY(-12rem);
         opacity: .2;
     }
     100% {
-        transform: translateX(0);
+        transform: translateY(0);
         opacity: 1;
     }
 }
