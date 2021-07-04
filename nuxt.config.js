@@ -1,4 +1,4 @@
-import { URL } from './config/var'
+const URL = process.env.API_URL
 
 export default {
     /*
@@ -83,11 +83,12 @@ export default {
                     user: {
                         url: '/auth/user',
                         method: 'get',
-                        propertyName: 'user',
+                        propertyName: '',
                     },
                 },
                 // tokenRequired: true,
                 // tokenType: 'bearer',
+                // tokenType: 'Bearer',
                 // globalToken: true,
                 // autoFetchUser: true
             },

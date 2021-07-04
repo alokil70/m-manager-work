@@ -46,7 +46,7 @@ export const actions = {
         if (token) {
             await this.$axios({
                 method: 'post',
-                url: '/goodsCategory',
+                url: '/semisCategory',
                 headers: {
                     Authorization: 'Bearer ' + token.split(' ')[2],
                 },

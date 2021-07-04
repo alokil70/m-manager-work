@@ -98,8 +98,17 @@
             <div class="flex-center-align m12">------------------------</div>
             <div class="flex-center-align m12">Калькуляция</div>
             <div>
-                <div class="m12">
-                    <m-select :options="goods" @select="itemSelected" />
+                <div class="m12 flex">
+                    <m-select
+                        :title="'Товар'"
+                        :options="goods"
+                        @select="itemSelected"
+                    />
+                    <m-select
+                        :title="'Полуфабрикат'"
+                        :options="semis"
+                        @select="itemSelected"
+                    />
                 </div>
                 <div class="m12">
                     <m-select :options="goods" @select="itemSelected" />
@@ -225,6 +234,7 @@ export default {
     computed: {
         ...mapState({
             goods: (state) => state.goodsItems.goodsItems,
+            semis: (state) => state.semis.semis,
             products: (state) => state.products.products,
             category: (state) => state.products.category,
             managers: (state) => state.users.users,

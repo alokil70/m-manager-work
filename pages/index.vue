@@ -23,6 +23,8 @@ export default {
     async asyncData({ store }) {
         await store.dispatch('goodsItems/GET_GOODS_FROM_API')
         await store.dispatch('goodsItems/GET_GOODSCATEGORY_FROM_API')
+        await store.dispatch('semis/GET_SEMIS_FROM_API')
+        await store.dispatch('semis/GET_SEMISCATEGORY_FROM_API')
         await store.dispatch('products/GET_PRODUCTS_FROM_API')
         await store.dispatch('products/GET_CATEGORY_FROM_API')
     },

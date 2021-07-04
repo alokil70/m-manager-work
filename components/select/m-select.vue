@@ -1,7 +1,7 @@
 <template>
     <div class="m-select">
         <p class="title" @click="selectVisible = !selectVisible">
-            {{ selectTitle }}
+            {{ title }}
         </p>
         <div v-if="selectVisible" class="m-select-options">
             <p
@@ -24,6 +24,10 @@ export default {
             default() {
                 return []
             },
+        },
+        title: {
+            type: String,
+            default: 'Выбор',
         },
     },
     data() {

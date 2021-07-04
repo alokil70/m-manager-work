@@ -121,17 +121,17 @@ export default {
         modalAddItem: false,
         modalAddGroup: false,
         storeItem: {
-            get: 'goodsItems/PRODUCTS',
-            actionGet: 'goodsItems/GET_GOODS_FROM_API',
-            actionSet: 'goodsItems/SET_GOODS_TO_API',
-            actionUpd: 'goodsItems/UPDATE_GOODS_ON_API',
-            actionDel: 'goodsItems/DELETE_GOODS_FROM_API',
+            get: 'semis/SEMIS',
+            actionGet: 'semis/GET_SEMIS_FROM_API',
+            actionSet: 'semis/SET_SEMIS_TO_API',
+            actionUpd: 'semis/UPDATE_GOODS_ON_API',
+            actionDel: 'semis/DELETE_GOODS_FROM_API',
         },
         storeCategory: {
-            get: 'goodsItems/CATEGORY',
-            actionGet: 'goodsItems/GET_GOODSCATEGORY_FROM_API',
-            actionSet: 'goodsItems/SET_GOODSCATEGORY_TO_API',
-            actionDel: 'goodsItems/DELETE_GOODSCATEGORY_FROM_API',
+            get: 'semis/SEMISCATEGORY',
+            actionGet: 'semis/GET_SEMISCATEGORY_FROM_API',
+            actionSet: 'semis/SET_SEMISCATEGORY_TO_API',
+            actionDel: 'semis/DELETE_SEMISCATEGORY_FROM_API',
         },
         columnName: [
             { id: 1, title: 'чтото' },
@@ -170,14 +170,14 @@ export default {
     }),
     computed: {
         ...mapState({
-            products: (state) => state.goodsItems.goodsItems,
-            category: (state) => state.goodsItems.goodsCategory,
+            products: (state) => state.semis.semis,
+            category: (state) => state.semis.semisCategory,
             managers: (state) => state.users.users,
         }),
         itemFilteredList() {
             if (this.selectedCategory) {
                 return this.products.filter(
-                    (i) => i.GoodsCategoryId === this.selectedCategory.id,
+                    (i) => i.SemisCategoryId === this.selectedCategory.id,
                 )
             } else {
                 return []
@@ -242,7 +242,7 @@ export default {
                 const obj = this.category.find(
                     (i) => i.id === this.selectedCategory.id,
                 )
-                this.editedItem.goodsCategoryId = obj.id
+                this.editedItem.semisCategoryId = obj.id
             }
 
             const formData = new FormData()

@@ -24,12 +24,12 @@ export const actions = {
         }
     },
     async SET_USER_TO_API({ commit }, payload) {
-        const token = this.$auth.getToken('local')
+        const token = 'data' // this.$auth.getToken('local')
         if (token) {
             try {
                 await this.$axios({
                     method: 'post',
-                    url: '/users',
+                    url: '/user',
                     headers: {
                         Authorization: 'Bearer ' + token.split(' ')[2],
                     },
